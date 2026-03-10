@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cstdlib> // For abs()
+
+using namespace std;
+
+// Function to update values using pointers
+void update(int *a, int *b) {
+    int sum = *a + *b;
+    int diff = abs(*a - *b);
+    
+    // Store results back in the memory addresses
+    *a = sum;
+    *b = diff;
+}
+
+int main() {
+    int a, b;
+    
+    if (cin >> a >> b) {
+        // Pass the addresses of a and b
+        update(&a, &b);
+        cout << a << endl;
+        cout << b << endl;
+    }
+    
+    return 0;
+}

@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+
+using namespace std;
+
+int main() {
+    string str;
+    cin >> str;
+    
+    stringstream ss(str);
+    char ch;
+    int num;
+
+    // Read the first number, then check for a comma and the next number
+    while (ss >> num) {
+        cout << num << endl;
+        ss >> ch; // Reads and discards the comma
+    }
+
+    return 0;
+}

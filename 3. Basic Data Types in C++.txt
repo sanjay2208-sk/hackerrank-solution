@@ -1,0 +1,26 @@
+#include <iostream>
+#include <iomanip> // Required for setprecision
+
+using namespace std;
+
+int main() {
+    int i;
+    long l;
+    char c;
+    float f;
+    double d;
+
+    // Read space-separated values
+    if (cin >> i >> l >> c >> f >> d) {
+        // Print each on a new line
+        cout << i << endl;
+        cout << l << endl;
+        cout << c << endl;
+        
+        // Use 'fixed' and 'setprecision' to control decimal places
+        cout << fixed << setprecision(3) << f << endl;
+        cout << fixed << setprecision(9) << d << endl;
+    }
+
+    return 0;
+}

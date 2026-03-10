@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <map>
+#include <sstream>
+
+using namespace std;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+    cin.ignore(); // Consume the newline after q
+
+    map<string, string> attributes;
+    string current_path = "";
+
+    for (int i = 0; i < n; i++) {
+        string line;
+        getline(cin, line);
+
+        if (line.substr(0, 2) == "</") {
+            // Closing tag: Remove the last tag from the current path
+            size_t pos = current_path.find_last_of('.');
+            if (pos != string::npos) current_path = current_path.substr(0, pos);
+            else current_path = "";
+        } else {
+            // Opening tag: Parse tag name and attributes
+            line = line.substr(1, line.length() - 2); // Remove < and >
+            stringstream ss(line);
+            string tag, attr, eq, val;
+            ss >> tag;
+
+            if (!current_path.empty()) current_path += "." + tag;
+            else current_path = tag;
+
+            while (ss >> attr >> eq >> val) {
+                // Remove quotes from value: "HelloWorld" -> HelloWorld
+                if (val.back() == '>') val.pop_back(); // Handle case where > is attached
+                val = val.substr(1, val.length() - 2);
+                attributes[current_path + "~" + attr] = val;
+            }
+        }
+    }
+
+    // Process queries
+    for (int i = 0; i < q; i++) {
+        string query;
+        getline(cin, query);
+        if (attributes.count(query)) cout << attributes[query] << endl;
+        else cout << "Not Found!" << endl;
+    }
+
+    return 0;
+}

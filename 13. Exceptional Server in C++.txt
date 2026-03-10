@@ -1,0 +1,42 @@
+#include <iostream>
+#include <exception>
+#include <string>
+#include <stdexcept>
+#include <vector>
+
+using namespace std;
+
+// This part mimics the server function you are calling
+class Server {
+public:
+    static int compute(long long a, long long b) {
+        if (a < 0) throw invalid_argument("A is negative");
+        vector<int> v(a*b*1000); // Trigger bad_alloc if too large
+        return a + b; 
+    }
+};
+
+int main() {
+    int T; cin >> T;
+    while(T--) {
+        long long A, B;
+        cin >> A >> B;
+
+        try {
+            // Call the compute function and print result
+            cout << Server::compute(A, B) << endl;
+        }
+        catch (bad_alloc& error) {
+            cout << "Not enough memory" << endl;
+        }
+        catch (exception& error) {
+            // Catches standard exceptions like invalid_argument
+            cout << "Exception: " << error.what() << endl;
+        }
+        catch (...) {
+            // Catches any other non-standard thrown objects
+            cout << "Other Exception" << endl;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,22 @@
+#include <iostream>
+#include <algorithm> // For std::max
+
+using namespace std;
+
+// Function to find the maximum of four integers
+int max_of_four(int a, int b, int c, int d) {
+    // You can compare them one by one or use the built-in max function
+    return max({a, b, c, d});
+}
+
+int main() {
+    int a, b, c, d;
+    
+    // Reading four integers from standard input
+    if (cin >> a >> b >> c >> d) {
+        int ans = max_of_four(a, b, c, d);
+        cout << ans << endl;
+    }
+    
+    return 0;
+}
