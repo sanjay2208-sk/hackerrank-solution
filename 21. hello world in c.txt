@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int main() {
+    // Standard "Hello, World!" line
+    printf("Hello, World!\n");
+    
+    // The specific sample input provided
+    printf("Welcome to C programming.\n");
+    
+    return 0;
+}
